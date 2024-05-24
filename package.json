@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/JKPotato-Computer/facturdle/issues"
   },
-  "homepage": "https://github.com/JKPotato-Computer/facturdle#readme",
+  "homepage": "https://github.com/JKPotato-Computer/facturdle",
   "dependencies": {
     "express": "^4.19.2",
     "socket.io": "^4.7.5"

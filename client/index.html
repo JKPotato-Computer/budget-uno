@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.socket.io/4.7.5/socket.io.js"></script>
+	<script>
+		let socket = io();
+		
+		socket.on("serverMsg", function(data) {
+			console.log(data.msg);
+		});
+	</script>
+</head>
+<body>
+	Hello world!
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "facturdle",
+  "version": "1.0.0",
+  "description": "If factoring polynomials were competitive.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JKPotato-Computer/facturdle.git"
+  },
+  "author": "JKPotato-Computer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JKPotato-Computer/facturdle/issues"
+  },
+  "homepage": "https://github.com/JKPotato-Computer/facturdle#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

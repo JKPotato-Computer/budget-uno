@@ -4,7 +4,7 @@
   "description": "If factoring polynomials were competitive.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JKPotato-Computer/facturdle",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "socket.io": "^4.7.5"
   }

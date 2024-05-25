@@ -1,6 +1,7 @@
 let express = require("express");
 let app = express();
 let serv = require("http").Server(app);
+const port = process.env.PORT || 5000;
 
 app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/client/index.html");
@@ -8,7 +9,7 @@ app.get("/", function(req, res) {
 
 app.use("/client",express.static(__dirname + "/client"));
 
-serv.listen(2000);
+serv.listen(port);
 
 let SOCKET_LIST = {};
 

@@ -4,7 +4,8 @@
   "description": "If factoring polynomials were competitive.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "startAlt": "cd /d D:\\%USERNAME%\\Downloads\\nodejs && node.exe \"%cd%\\app.js\""
   },
   "repository": {
     "type": "git",

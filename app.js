@@ -16,13 +16,15 @@ const PORT = process.env.PORT || 3000;
 
 let SOCKET_LIST = {};
 
+server.listen(PORT, () => console.log("server running!"))
+
 app.use(express.static(__dirname + "/client"));
 
 app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/client/index.html");
 })
 
-io.on("connection", function(socket) {
+io.sockets.on("connection", function(socket) {
 	console.log("connected!")
 	socket.id = Math.random();
 	SOCKET_LIST[socket.id] = socket;
@@ -35,8 +37,6 @@ io.on("connection", function(socket) {
 		msg : "server test",
 	})
 });
-
-server.listen(PORT, () => console.log("server running!"))
 
 setInterval(function(){
 	for (const i in SOCKET_LIST) {

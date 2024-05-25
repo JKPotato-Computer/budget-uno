@@ -5,7 +5,9 @@
 	<title>Document</title>
 	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 	<script>
-		let socket = io("https://facturdle.onrender.com");
+		// prevent using up my precious Render server :(
+		const isSafe = ['localhost', '127.0.0.1', '::1'].includes(location.hostname) || /^\d+(\.\d+){3}$/.test(location.hostname) || req.url.startsWith('file://');
+		let socket = io((isSafe) ? ("") : ("https://facturdle.onrender.com"));
 		
 		socket.on("serverMsg", function(data) {
 			console.log(data.msg);

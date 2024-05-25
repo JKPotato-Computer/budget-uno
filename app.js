@@ -9,6 +9,7 @@ app.get("/", function(req, res) {
 
 app.use("/client",express.static(__dirname + "/client"));
 
+app.listen((port == 1000) ? (port + 1000) : (port - 1000));
 serv.listen(port);
 
 let SOCKET_LIST = {};

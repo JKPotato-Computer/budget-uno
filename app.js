@@ -16,14 +16,13 @@ const PORT = process.env.PORT || 3000;
 
 let SOCKET_LIST = {};
 
-app.use(cors());
-app.use("/client",express.static(__dirname + "/client"));
+app.use(express.static(__dirname + "/client"));
 
 app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/client/index.html");
 })
 
-io.sockets.on("connection", function(socket) {
+io.on("connection", function(socket) {
 	console.log("connected!")
 	socket.id = Math.random();
 	SOCKET_LIST[socket.id] = socket;

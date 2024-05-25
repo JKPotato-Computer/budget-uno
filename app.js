@@ -13,7 +13,11 @@ serv.listen(port);
 
 let SOCKET_LIST = {};
 
-let io = require("socket.io")(serv,{});
+let io = require("socket.io")(serv,{
+	cors: {
+		origin : "http://localhost:5000",
+	}
+});
 io.sockets.on("connection", function(socket) {
 	socket.id = Math.random();
 	SOCKET_LIST[socket.id] = socket;

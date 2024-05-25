@@ -1,7 +1,8 @@
 let express = require("express");
 let app = express();
-let serv = require("http").Server(app);
 const port = process.env.PORT || 5000;
+
+let serv = require("http").createServer(app);
 
 app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/client/index.html");
@@ -14,10 +15,11 @@ serv.listen(port);
 
 let SOCKET_LIST = {};
 
-let io = require("socket.io")(serv,{
+let io = require("socket.io")(serv, {
 	cors: {
 		origin : "http://localhost:5000",
-	}
+	},
+	resource: '/ws/socket.io'
 });
 io.sockets.on("connection", function(socket) {
 	socket.id = Math.random();

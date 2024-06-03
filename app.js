@@ -28,32 +28,33 @@ app.get("/", function(req, res) {
 	res.sendFile(__dirname + "/client/index.html");
 })
 
+function countForSockets(serverID) {
+	let i = 0;
+	let socketList = [];
+	for (const socketID in SOCKET_LIST) {
+		let sockets = SOCKET_LIST[socketID];
+		if (sockets.rooms.has(serverID)) {
+			i++;
+			socketList.push(sockets.id);
+		}
+	}
+	return i;
+}
+
+function serverStatsChange(serverID) {
+	let data = {
+		sockets: countForSockets(serverID)
+	};
+
+	for (const sID in SOCKET_LIST) {
+		let iSocket = SOCKET_LIST[sID];
+		if (iSocket.rooms.has(serverID)) {
+			iSocket.emit("serverStatsChange",data);
+		}
+	}
+}
+
 io.sockets.on("connection", function(socket) {
-	function countForSockets(serverID) {
-		let i = 0;
-		let socketList = [];
-		for (const socketID in SOCKET_LIST) {
-			let sockets = SOCKET_LIST[socketID];
-			if (sockets.rooms.has(serverID)) {
-				i++;
-				socketList.push(sockets.id);
-			}
-		}
-		return i;
-	}
-
-	function serverStatsChange(serverID) {
-		let data = {
-			sockets: countForSockets(serverID)
-		};
-
-		for (const sID in SOCKET_LIST) {
-			let iSocket = SOCKET_LIST[sID];
-			if (iSocket.rooms.has(serverID)) {
-				iSocket.emit("serverStatsChange",data);
-			}
-		}
-	}
 
 	socket.id = Math.random();
 	SOCKET_LIST[socket.id] = socket;
@@ -62,6 +63,10 @@ io.sockets.on("connection", function(socket) {
 	};
 
 	// User Data
+
+	socket.on("updateData",function(data) {
+		SOCKET_DATA[socket.id] = data;
+	})
 
 	// Servers
 
@@ -73,7 +78,7 @@ io.sockets.on("connection", function(socket) {
 		let serverData = {
 			leader: socket.id, // Creator's 'Socket ID
 			playerList : {
-				socket.id
+				[socket.id] : SOCKET_DATA[socket.id]
 			}
 		}
 
@@ -104,6 +109,8 @@ io.sockets.on("connection", function(socket) {
 		if (!AVAILABLE_SERVERS[serverID]) {
 			return;
 		}
+		
+		AVAILABLE_SERVERS[serverID].playerList[socket.id] = SOCKET_DATA[socket.id]
 
 		socket.join(serverID);
 		socket.emit("serverJoin",serverID);
@@ -114,15 +121,12 @@ io.sockets.on("connection", function(socket) {
 		if (!AVAILABLE_SERVERS[serverID]) {
 			return;
 		}
+		
+		delete AVAILABLE_SERVERS[serverID].playerList[socket.id]
 
 		socket.leave(serverID);
 		socket.emit("serverLeave");
 		serverStatsChange(serverID);
-
-		if (countForSockets(serverID) == 0) {
-			console.log("Server closed/at 0: G-" + serverID);
-			delete AVAILABLE_SERVERS[serverID];
-		}
 	})
 	
 	socket.on("disconnect", function() {
@@ -136,3 +140,12 @@ io.sockets.on("connection", function(socket) {
 		delete SOCKET_LIST[socket.id];
 	});
 });
+
+setInterval(function() {
+	for (const serverID in AVAILABLE_SERVERS) {
+		if (countForSockets(serverID) == 0) {
+			console.log("Server closed/at 0: G-" + serverID);
+			delete AVAILABLE_SERVERS[serverID];
+		}	
+	}
+},(1000/25))

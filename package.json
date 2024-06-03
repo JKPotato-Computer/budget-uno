@@ -1,7 +1,7 @@
 {
-  "name": "facturdle",
+  "name": "budget-uno",
   "version": "1.0.0",
-  "description": "If factoring polynomials were competitive.",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JKPotato-Computer/facturdle.git"
+    "url": "git+https://github.com/JKPotato-Computer/budget-uno.git"
   },
   "author": "JKPotato-Computer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JKPotato-Computer/facturdle/issues"
+    "url": "https://github.com/JKPotato-Computer/budget-uno/issues"
   },
-  "homepage": "https://github.com/JKPotato-Computer/facturdle",
+  "homepage": "https://github.com/JKPotato-Computer/budget-uno",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",

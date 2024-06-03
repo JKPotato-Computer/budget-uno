@@ -4,17 +4,33 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-	<script>
-		// prevent using up my precious Render server :(
-		const isSafe = ['localhost', '127.0.0.1', '::1'].includes(location.hostname) || /^\d+(\.\d+){3}$/.test(location.hostname) || req.url.startsWith('file://');
-		let socket = io((isSafe) ? ("") : ("https://facturdle.onrender.com"));
-		
-		socket.on("serverMsg", function(data) {
-			console.log(data.msg);
-		});
-	</script>
+	<script src="main.js" defer></script>
+
+	<style>
+		.invisible {
+			display: none;
+		}
+	</style>
 </head>
 <body>
-	Hello world!
+	<label for="codeEnter">Enter Code:</label>
+	<input type="number" id="codeEnter">
+	<button id="submitCode">Enter</button>
+	<button id="leaveServer" class="invisible">Leave</button>
+	<br>
+	<button id="createServer">Create</button>
+	<button id="destroyServer" class="invisible">Destroy</button>
+	<span id="serverID" class="invisible">Server ID:</span>
+	<span id="serverSockets" class="invisible">Sockets:</span>
+	<br>
+	
+	<fieldset>
+		<legend>User Info</legend>
+		<label for="usernameField">Username:</label>
+		<input type="text" id="usernameField">
+	</fieldset>
+	
+	<div id="playerList">
+	</div>
 </body>
 </html>

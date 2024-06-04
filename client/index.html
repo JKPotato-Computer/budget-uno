@@ -18,7 +18,9 @@
 	<button id="submitCode">Enter</button>
 	<button id="leaveServer" class="invisible">Leave</button>
 	<br>
-	<button id="createServer">Create</button>
+	<span>Create: </span>
+	<button id="createPubServer">Public Server</button>
+	<button id="createPrivServer">Private Server</button>
 	<button id="destroyServer" class="invisible">Destroy</button>
 	<span id="serverID" class="invisible">Server ID:</span>
 	<span id="serverSockets" class="invisible">Sockets:</span>
@@ -28,9 +30,13 @@
 		<legend>User Info</legend>
 		<label for="usernameField">Username:</label>
 		<input type="text" id="usernameField">
+		<button id="save">Save</button>
 	</fieldset>
 	
 	<div id="playerList">
+	</div>
+
+	<div id="serverList">
 	</div>
 </body>
 </html>
